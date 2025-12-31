@@ -1,0 +1,27 @@
+.problem-box {
+  padding: 16px;
+  border-bottom: 1px solid #333;
+}
+
+.problem-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.problem-desc {
+  color: #c9c9c9;
+  line-height: 1.6;
+}
+
+.example {
+  background: #1e1e1e;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 12px;
+}
+
+.example pre {
+  color: #e6e6e6;
+  font-size: 14px;
+}
