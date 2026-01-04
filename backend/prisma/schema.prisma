@@ -10,20 +10,31 @@ generator client {
 model User {
   id        Int          @id @default(autoincrement())
   email     String       @unique
+  username  String       @unique
   password  String
   createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
 
   submissions Submission[]
 }
 
 model Problem {
   id          Int          @id @default(autoincrement())
-  title       String
+  title       String       @unique
+  slug        String       @unique
   description String
-  difficulty  String
-  examples    Json
-  testCases   Json
+  difficulty  String       // Easy, Medium, Hard
+  category    String       // Array, String, DP, etc.
+  hints       String[]     // Array of hints
+  constraints String[]     // Array of constraints
+  examples    Json         // Array of example objects
+  starterCode Json         // Starter code for each language
+  testCases   Json         // Array of test cases (input, output)
+  hiddenCases Json?        // Hidden test cases for submission
+  likes       Int          @default(0)
+  dislikes    Int          @default(0)
   createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 
   submissions Submission[]
 }
@@ -32,14 +43,54 @@ model Submission {
   id          Int      @id @default(autoincrement())
   userId      Int
   problemId   Int
-  language    String
+  language    String   // javascript, python, cpp, java
   code        String
-  status      String
-  output      String?
-  executionMs Int?
+  status      String   // Accepted, Wrong Answer, Runtime Error, Time Limit Exceeded
+  runtime     Int?     // in ms
+  memory      Int?     // in KB
+  passedCases Int      // Number of test cases passed
+  totalCases  Int      // Total test cases
+  error       String?  // Error message if any
+  output      String?  // Console output
   createdAt   DateTime @default(now())
 
   user    User    @relation(fields: [userId], references: [id])
   problem Problem @relation(fields: [problemId], references: [id])
+
+  @@index([userId])
+  @@index([problemId])
+  @@index([createdAt])
+}
+// Add to your existing schema
+
+model User {
+  // ... existing fields ...
+  role      String   @default("user") // "user", "admin", "moderator"
 }
 
+// Admin logs for tracking changes
+model AdminLog {
+  id        Int      @id @default(autoincrement())
+  adminId   Int
+  action    String   // "create_problem", "update_problem", "delete_problem"
+  target    String   // Problem title or ID
+  details   Json?
+  createdAt DateTime @default(now())
+  
+  admin User @relation(fields: [adminId], references: [id])
+}
+
+// Problem categories/tags for better organization
+model ProblemCategory {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  slug      String   @unique
+  problems  Problem[]
+}
+
+// Update Problem model relation
+model Problem {
+  // ... existing fields ...
+  categoryId Int?
+  category   ProblemCategory? @relation(fields: [categoryId], references: [id])
+}
