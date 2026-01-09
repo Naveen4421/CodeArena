@@ -1,0 +1,176 @@
+/* src/components/layout/Layout.css */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-container {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: #1f2937;
+  color: white;
+  padding: 20px 0;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0 15px;
+}
+
+.nav-link {
+  color: #d1d5db;
+  text-decoration: none;
+  padding: 12px 15px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  background: #374151;
+  color: white;
+}
+
+.nav-link.active {
+  background: #3b82f6;
+  color: white;
+}
+
+.admin-link {
+  margin-top: 20px;
+  background: #8b5cf6;
+  color: white;
+}
+
+.admin-link:hover {
+  background: #7c3aed;
+}
+
+.nav-divider {
+  height: 1px;
+  background: #374151;
+  margin: 15px 0;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 30px;
+  background: #f9fafb;
+  overflow-y: auto;
+}
+
+/* Admin Layout */
+.admin-header {
+  background: #111827;
+  color: white;
+  padding: 20px 30px;
+}
+
+.admin-header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-to-site {
+  color: #d1d5db;
+  text-decoration: none;
+}
+
+.back-to-site:hover {
+  color: white;
+}
+
+.admin-sidebar {
+  background: #111827;
+}
+
+.admin-content {
+  padding: 30px;
+}
+/* Add to src/components/layout/Layout.css */
+
+/* Header Styles */
+.header {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 15px 0;
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+  background: var(--background);
+}
+
+.nav-links .admin-link {
+  color: #8b5cf6;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.login-btn {
+  background: var(--primary);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.login-btn:hover {
+  background: var(--primary-dark);
+}

@@ -61,36 +61,3 @@ model Submission {
   @@index([problemId])
   @@index([createdAt])
 }
-// Add to your existing schema
-
-model User {
-  // ... existing fields ...
-  role      String   @default("user") // "user", "admin", "moderator"
-}
-
-// Admin logs for tracking changes
-model AdminLog {
-  id        Int      @id @default(autoincrement())
-  adminId   Int
-  action    String   // "create_problem", "update_problem", "delete_problem"
-  target    String   // Problem title or ID
-  details   Json?
-  createdAt DateTime @default(now())
-  
-  admin User @relation(fields: [adminId], references: [id])
-}
-
-// Problem categories/tags for better organization
-model ProblemCategory {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  slug      String   @unique
-  problems  Problem[]
-}
-
-// Update Problem model relation
-model Problem {
-  // ... existing fields ...
-  categoryId Int?
-  category   ProblemCategory? @relation(fields: [categoryId], references: [id])
-}
